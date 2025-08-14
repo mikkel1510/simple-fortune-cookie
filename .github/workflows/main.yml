@@ -42,5 +42,5 @@ jobs:
           context: .
           file: frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/simple-fortune-cookie-backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/simple-fortune-cookie-frontend:latest
 
