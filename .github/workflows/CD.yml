@@ -14,7 +14,7 @@ jobs:
           version: latest
       - run: |
           echo "$KUBE_CONFIG" | base64 -d > kubeconfig
-          kubectl --kubeconfig kubeconfig apply -f manifest.yaml
+          kubectl --kubeconfig kubeconfig apply -f manifest.yaml --validate=false
           kubectl --kubeconfig kubeconfig rollout restart deployment/backend
           kubectl --kubeconfig kubeconfig rollout restart deployment/frontend
         env:
