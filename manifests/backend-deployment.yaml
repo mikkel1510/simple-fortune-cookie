@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: docker.io/mikkel1510/simple-fortune-cookie-backend:latest
+          env:
+            - name: REDIS_DNS
+              value: redis
+          ports:
+            - containerPort: 9000
