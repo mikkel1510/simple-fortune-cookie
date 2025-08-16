@@ -14,8 +14,13 @@ jobs:
           version: latest
       - run: |
           echo "$KUBE_CONFIG" | base64 -d > kubeconfig
-          kubectl --kubeconfig kubeconfig apply -f manifest.yaml --validate=false
-          kubectl --kubeconfig kubeconfig rollout restart deployment/backend
-          kubectl --kubeconfig kubeconfig rollout restart deployment/frontend
+          kubectl --kubeconfig kubeconfig apply \
+            -f backend-deployment.yaml \
+            -f backend-service.yaml \
+            -f frontend-deployment.yaml \
+            -f frontend-service.yaml \
+            --validate=false
+           kubectl --kubeconfig kubeconfig rollout status deploy/backend
+           kubectl --kubeconfig kubeconfig rollout status deploy/frontend
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
