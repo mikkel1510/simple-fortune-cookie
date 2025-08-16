@@ -14,8 +14,8 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
       - run: |
-          kubectl --kubeconfig kubeconfig apply -f manifest/testing/frontend-test-deployment.yaml -f manifest/testing/frontend-test-service.yaml --validate=false
+          kubectl --kubeconfig kubeconfig apply -f manifests/testing/frontend-test-deployment.yaml -f manifests/testing/frontend-test-service.yaml --validate=false
           kubectl --kubeconfig kubeconfig rollout status deploy/frontend-test
           kubectl --kubeconfig kubeconfig run --rm -i curl --image=curlimages/curl:8.8.0 --restart=Never -- sh -lc 'curl -fsS http://frontend-test:8080/api/random >/dev/null'
       - if: always()
-        run: kubectl --kubeconfig kubeconfig delete -f manifest/testing/frontend-test-service.yaml -f manifest/testing/frontend-test-deployment.yaml --ignore-not-found=true
+        run: kubectl --kubeconfig kubeconfig delete -f manifests/testing/frontend-test-service.yaml -f manifests/testing/frontend-test-deployment.yaml --ignore-not-found=true
