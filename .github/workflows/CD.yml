@@ -15,10 +15,10 @@ jobs:
       - run: |
           echo "$KUBE_CONFIG" | base64 -d > kubeconfig
           kubectl --kubeconfig kubeconfig apply \
-            -f backend-deployment.yaml \
-            -f backend-service.yaml \
-            -f frontend-deployment.yaml \
-            -f frontend-service.yaml \
+            -f manifests/production/backend-deployment.yaml \
+            -f manifests/production/backend-service.yaml \
+            -f manifests/production/frontend-deployment.yaml \
+            -f manifests/production/frontend-service.yaml \
             --validate=false
            kubectl --kubeconfig kubeconfig rollout status deploy/backend
            kubectl --kubeconfig kubeconfig rollout status deploy/frontend

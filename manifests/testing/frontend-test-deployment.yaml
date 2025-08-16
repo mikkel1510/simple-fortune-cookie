@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-test
+  template:
+    metadata:
+      labels:
+        app: frontend-test
+    spec:
+      containers:
+        - name: frontend
+          image: docker.io/mikkel1510/simple-fortune-cookie-frontend:latest
+          imagePullPolicy: Always
+          env:
+            - name: BACKEND_DNS
+              value: backend-test
+            - name: BACKEND_PORT
+              value: "9000"
+          ports:
+            - containerPort: 8080
