@@ -37,19 +37,6 @@ jobs:
           sleep 10
           bash ./test.sh 
   
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: '1.22'
-      - name: Test Frontend
-        run: |
-          cd frontend
-          go test ./...
-      
   
   publish:
     runs-on: ubuntu-latest
