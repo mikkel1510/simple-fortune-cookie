@@ -32,6 +32,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Run integration tests with Docker
+        working-directory: .
         run: |
           docker compose -f "docker-compose.yaml" up -d
           sleep 10
